@@ -34,7 +34,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'curl http://13.231.243.154:8080/webapptest/home'
+                    sh 'curl http://13.231.243.154:9090/webapptest/home'
                 }
             }
         }
