@@ -14,8 +14,8 @@ RUN apk add --no-cache maven
 RUN dos2unix mvnw
 RUN ./mvnw package
 
-# Run Maven to build the application
-RUN ./mvnw package
+# Expose port 8080
+EXPOSE 8080
 
 # Set the command to run the application when the container starts
 CMD ["java", "-jar", "target/webapptest.jar"]
