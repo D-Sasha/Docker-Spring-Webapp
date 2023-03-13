@@ -1,6 +1,8 @@
 # Use an official OpenJDK runtime as a parent image
 FROM adoptopenjdk/openjdk11:alpine-slim
 
+ADD target/webapptest.jar webapptest.jar
+
 # Set the working directory to /app
 WORKDIR /app
 
@@ -16,4 +18,4 @@ RUN ./mvnw package
 RUN ./mvnw package
 
 # Set the command to run the application when the container starts
-CMD ["java", "-jar", "target/spring-webapp.jar"]
+CMD ["java", "-jar", "target/webapptest.jar"]
