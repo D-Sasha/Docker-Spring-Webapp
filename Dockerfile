@@ -1,14 +1,14 @@
-# Dockerfile
+# Use an official OpenJDK runtime as a parent image
+FROM adoptopenjdk/openjdk11:alpine-jre
 
-FROM eclipse-temurin:17-jdk-focal
-ADD target/spring-webapp.jar spring-webapp.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "spring-webapp.jar"]
+# Set the working directory to /app
+WORKDIR /app
 
-#FROM maven:3-jdk-11 AS builder
-#WORKDIR /app
-#COPY . .
-#RUN mvn clean package
+# Copy the contents of the local directory into the container at /app
+COPY . /app
 
-#FROM tomcat:9-jdk11
-#COPY --from=builder /app/target/webapptest.war /usr/local/tomcat/webapps/
+# Run Maven to build the application
+RUN ./mvnw package
+
+# Set the command to run the application when the container starts
+CMD ["java", "-jar", "target/spring-webapp.jar"]
