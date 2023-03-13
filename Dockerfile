@@ -1,15 +1,16 @@
-FROM openjdk:11-jre-slim
+# Use an official OpenJDK runtime as a parent image
+FROM adoptopenjdk/openjdk11:alpine-jre
 
+# Set the working directory to /app
 WORKDIR /app
 
-COPY . .
+# Copy the contents of the local directory into the container at /app
+COPY . /app
 
-# Add execute permissions to the Maven Wrapper script
-RUN chmod +x mvnw
-
-# Build the application with Maven
+# Run Maven to build the application
+RUN apk add --no-cache maven
+RUN dos2unix mvnw
 RUN ./mvnw package
 
-EXPOSE 8080
-
-CMD ["java", "-jar", "./target/webapp-0.0.1-SNAPSHOT.jar"]
+# Set the command to run the application when the container starts
+CMD ["java", "-jar", "target/spring-webapp.jar"]
