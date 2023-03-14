@@ -12,6 +12,7 @@ COPY . /app
 # Run Maven to build the application
 RUN apk add --no-cache maven
 RUN dos2unix mvnw
+RUN chmod +x mvnw
 RUN ./mvnw package
 
 # Expose port 8080
