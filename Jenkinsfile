@@ -8,13 +8,9 @@ pipeline {
             }
         }
 
-        stage('Maven Install') {
-           agent {
-              docker {
-                 image 'maven:3.5.0'
-              }
-           }
+        stage('Execute Maven') {
            steps {
+
                 sh 'mvn clean install'
            }
         }
@@ -24,6 +20,14 @@ pipeline {
                 sh 'docker build -t spring-webapp .'
             }
         }
+
+       /*
+       stage('Run Docker container on Jenkins'){
+            steps {
+                sh 'docker run -p 8003:8080 spring-webapp'
+            }
+       }
+        */
 
         stage('Run Docker container on Remote') {
             steps {
