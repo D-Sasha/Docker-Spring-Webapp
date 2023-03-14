@@ -4,13 +4,17 @@ pipeline {
         
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/Sasha-Due/spring-webapp.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/Sasha-Due/spring-webapp.git']]])
             }
         }
 
-        stage('Execute Maven') {
+        stage('Maven Install') {
+           agent {
+              docker {
+                 image 'maven:3.5.0'
+              }
+           }
            steps {
-
                 sh 'mvn clean install'
            }
         }
@@ -20,14 +24,6 @@ pipeline {
                 sh 'docker build -t spring-webapp .'
             }
         }
-
-       /*
-       stage('Run Docker container on Jenkins'){
-            steps {
-                sh 'docker run -p 8003:8080 spring-webapp'
-            }
-       }
-        */
 
         stage('Run Docker container on Remote') {
             steps {
