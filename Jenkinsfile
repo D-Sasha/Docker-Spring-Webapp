@@ -1,27 +1,19 @@
 pipeline {
     agent any
     stages {
-        /*
+        
         stage('Pull Sources') {
             steps {
                 git url: 'https://github.com/Sasha-Due/spring-webapp.git'
             }
         }
-*/
-        stage('Cloning our Git') {
-            steps {
-                git 'https://github.com/Sasha-Due/spring-webapp.git'
-            }
-        }
 
-        /*
         stage('Execute Maven') {
            steps {
 
                 sh 'mvn package'
            }
         }
-        */
 
         stage('Docker Build and Tag') {
             steps {
