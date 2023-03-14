@@ -2,16 +2,16 @@ pipeline {
     agent any
     stages {
         
-        stage('Pull Sources') {
+        stage('Checkout') {
             steps {
-                git url: 'https://github.com/Sasha-Due/spring-webapp.git'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/Sasha-Due/spring-webapp.git']]])
             }
         }
 
         stage('Execute Maven') {
            steps {
 
-                sh 'mvn package'
+                sh 'mvn clean install'
            }
         }
 
