@@ -8,19 +8,25 @@ pipeline {
             }
          }
         
-        stage('Build') {
+       stage('Docker Build and Tag'){
             steps {
-                sh 'mvn clean install'
+                sh 'docker build -t spring-webapp .'
             }
-        }
+       }
 
-	stage ('Deploy') {
-          steps {
-	sshagent(['deployuser']) {
-	    sh "scp -o StrictHostKeyChecking=no target/webapptest.war ubuntu@54.92.220.219:/usr/local/tomcat/webapps/webapptest.war"
-	    }
-	  }
-	}  	    
+       /*
+       stage('Run Docker container on Jenkins'){
+            steps {
+                sh 'docker run -p 8003:8080 spring-webapp'
+            }
+       }
+        */
+
+        stage('Run Docker container on Remote'){
+            steps {
+                sh "docker -H tcp://107.21.59.88:2375 run -d -p 8003:8080 spring-webapp"
+            }
+       }
 	    
     }
 }
