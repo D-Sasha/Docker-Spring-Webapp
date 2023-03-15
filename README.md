@@ -8,9 +8,9 @@ The SPA was created using Spring Initializr. There are some dummy test included 
 
 ## Screenshots
 
-![Pipeline](pictures/pipeline.png)
+<img src="pictures/pipeline.png" width="700" height="400" />
 
-![DockerHub](pictures/dockerhub.png)
+<img src="pictures/dockerhub.png" width="600" height="600" />
 
 ![RemoteHost](pictures/remotehost.png)
 
