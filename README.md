@@ -8,10 +8,10 @@ The SPA was created using Spring Initializr. There are some dummy test included 
 
 ## Screenshots
 
-![Pipeline](images/pipeline.png)
+![Pipeline](pictures/pipeline.png)
 
-![DockerHub](images/dockerhub.png)
+![DockerHub](pictures/dockerhub.png)
 
-![RemoteHost](images/remotehost.png)
+![RemoteHost](pictures/remotehost.png)
 
 
